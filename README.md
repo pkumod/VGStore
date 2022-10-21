@@ -11,3 +11,7 @@ Please refer to `README.md` in `demo` folder.
 ## RDF-VG Builder
 
 Please refer to code in `rdf-vg` folder.
+
+## VG Parser
+
+Please refer to example code in `parser` folder.
