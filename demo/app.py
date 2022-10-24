@@ -3,13 +3,13 @@ from gstore import GstoreConnector
 from flask_cors import CORS
 
 gStore_config = {
-    'ip': '127.0.0.1',
+    'ip': '172.31.209.81',
     'port': '5001',
     'user': 'root',
     'password': '123456',
-    'database': 'vg_v5'
+    'database': 'pkubase'
 }
-gc =  GstoreConnector(gStore_config['ip'], gStore_config['port'], gStore_config['user'], gStore_config['password'])
+gc = GstoreConnector(gStore_config['ip'], gStore_config['port'], gStore_config['user'], gStore_config['password'], http_type='grpc')
 
 app = Flask(__name__, static_url_path='', static_folder='./frontend/dist/')
 app.config['threaded'] = True
