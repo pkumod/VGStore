@@ -24,8 +24,8 @@ def server():
 @app.route('/query', methods=['POST'])
 def query():
     query = request.get_json()['query']
-    return gc.query(db_name=gStore_config['database'], format='json', sparql=query)
+    return gc.query(db_name=gStore_config['database'], format='json', sparql=query, request_type='GET')
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0')

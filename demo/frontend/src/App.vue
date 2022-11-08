@@ -2,7 +2,7 @@
     <a-layout id="components-layout-demo-top-side">
         <a-layout-header class="header">
             <div class="logo">
-<!--                <img src="./assets/logo.png"/>-->
+                <!--                <img src="./assets/logo.png"/>-->
                 VGStore
             </div>
             <div class="nav">
@@ -16,11 +16,11 @@
             <a-layout style="padding: 24px; background: #fff; min-height: calc(100vh - 64px - 69px)">
                 <h1 class="title">VGStore Query Interface</h1>
                 <div class=""></div>
-<!--                <a-textarea-->
-<!--                    style="margin-bottom: 24px"-->
-<!--                    placeholder="Please input your query"-->
-<!--                    v-model="query"-->
-<!--                    :auto-size="{ minRows: 5}"/>-->
+                <!--                <a-textarea-->
+                <!--                    style="margin-bottom: 24px"-->
+                <!--                    placeholder="Please input your query"-->
+                <!--                    v-model="query"-->
+                <!--                    :auto-size="{ minRows: 5}"/>-->
 
                 <div ref="queryContainer">
                 </div>
@@ -29,30 +29,37 @@
                 </a-button>
                 <a-divider v-show="show_result">Results</a-divider>
 
-<!--<a-row v-if="getCol.map(e => e.key).includes('img')">-->
-<!--                    <div style="position: relative; display: inline-block;" v-for="(line, i) in result['results']['bindings']" v-bind:key='i'>-->
-<!--                        <div style="position: absolute; border: 2px solid red;" v-if="'x' in line" v-bind:style="{height: line['h']['value'] + 'px', width: line['w']['value'] + 'px', top: line['y']['value'] + 'px', left: line['x']['value'] + 'px'}" />-->
-<!--                        <img :src="'http://localhost:9090/' + line['img']['value'].substring(6) + '.jpg'">-->
-<!--                    </div>-->
-<!--                </a-row>-->
+                <!--<a-row v-if="getCol.map(e => e.key).includes('img')">-->
+                <!--                    <div style="position: relative; display: inline-block;" v-for="(line, i) in result['results']['bindings']" v-bind:key='i'>-->
+                <!--                        <div style="position: absolute; border: 2px solid red;" v-if="'x' in line" v-bind:style="{height: line['h']['value'] + 'px', width: line['w']['value'] + 'px', top: line['y']['value'] + 'px', left: line['x']['value'] + 'px'}" />-->
+                <!--                        <img :src="'http://localhost:9090/' + line['img']['value'].substring(6) + '.jpg'">-->
+                <!--                    </div>-->
+                <!--                </a-row>-->
 
                 <a-row>
                     <a-col :span="8">
                         <JSONResult :data="result" :loading="loading" v-show="show_result" class="result-json"/>
                     </a-col>
-                    <a-col :span="2" />
+                    <a-col :span="2"/>
                     <a-col :span="14" v-if="getCol.map(e => e.key).includes('img')">
-<!--                        <a-table v-show="show_result" :columns="getCol" :data-source="getData" class="result-table">-->
-<!--                            <a slot="name" slot-scope="text">{{ text }}</a>-->
-<!--                        </a-table>-->
-                        <div style="position: relative; display: inline-block;" v-for="(line, i) in result['results']['bindings']" v-bind:key='i'>
-                            <div style="position: absolute; border: 2px solid red;" v-if="'x' in line" v-bind:style="{height: line['h']['value'] + 'px', width: line['w']['value'] + 'px', top: line['y']['value'] + 'px', left: line['x']['value'] + 'px'}" />
-                            <img :src="'http://localhost:9090/' + line['img']['value'].substring(6) + '.jpg'">
+                        <!--                        <a-table v-show="show_result" :columns="getCol" :data-source="getData" class="result-table">-->
+                        <!--                            <a slot="name" slot-scope="text">{{ text }}</a>-->
+                        <!--                        </a-table>-->
+                        <!--                        <div style="position: relative; display: inline-block;" v-for="(line, i) in result['results']['bindings']" v-bind:key='i'>-->
+                        <!--                            <div style="position: absolute; border: 2px solid red;" v-if="'x' in line" v-bind:style="{height: line['h']['value'] + 'px', width: line['w']['value'] + 'px', top: line['y']['value'] + 'px', left: line['x']['value'] + 'px'}" />-->
+                        <!--                            <img :src="'http://localhost:9090/' + line['img']['value'].substring(6) + '.jpg'">-->
+                        <!--                        </div>-->
+                        <div style="position: relative; display: inline-block;"
+                             v-for="(line, i) in result['results']['bindings']" v-bind:key='i'>
+                            <div
+                                style="position: absolute; bottom: 20px; left: 40px; width: 120px; overflow: hidden; background-color: rgba(255,255,255,.8); padding: 5px"
+                                v-if="'name' in line">{{ line['name']['value'] }}
+                            </div>
+                            <img :src="'http://172.31.209.81:9090/' + line['img']['value']"
+                                 style="height: 200px; width: 200px;">
                         </div>
                     </a-col>
                 </a-row>
-
-
 
 
             </a-layout>
@@ -67,6 +74,7 @@
 import axios from 'axios'
 import JSONResult from './components/result.json'
 import Yasqe from '@triply/yasqe'
+
 export default {
     components: {JSONResult},
     data() {
@@ -94,9 +102,9 @@ export default {
             if (!('results' in this.result))
                 return []
             return this.result.results.bindings
-        }
+        },
     },
-    mounted(){
+    mounted() {
         this.initYasqe()
     },
     methods: {
@@ -118,7 +126,7 @@ export default {
                     createShareableLink: false,
                     showQueryButton: false,
                     value: this.query,
-                    syntaxErrorCheck: false
+                    syntaxErrorCheck: false,
                 })
         },
     },
@@ -180,7 +188,7 @@ export default {
 
 <style>
 span.cm-error {
-    color: black!important;
-    border-bottom: none!important;
+    color: black !important;
+    border-bottom: none !important;
 }
 </style>
