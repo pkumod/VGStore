@@ -55,7 +55,7 @@
                                 style="position: absolute; bottom: 20px; left: 40px; width: 120px; overflow: hidden; background-color: rgba(255,255,255,.8); padding: 5px"
                                 v-if="'name' in line">{{ line['name']['value'] }}
                             </div>
-                            <img :src="'http://172.31.209.81:9090/' + line['img']['value']"
+                            <img :src="'/img_base/' + line['img']['value']"
                                  style="height: 200px; width: 200px;">
                         </div>
                     </a-col>
@@ -110,7 +110,7 @@ export default {
     methods: {
         performQuery() {
             this.loading = true
-            axios.post('http://127.0.0.1:5000/query', {
+            axios.post('/query', {
                 query: this.yasqe.getValue(),
             }).then(res => {
                 console.log(res)

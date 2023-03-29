@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, send_from_directory
 from gstore import GstoreConnector
 from flask_cors import CORS
 
@@ -25,6 +25,14 @@ def server():
 def query():
     query = request.get_json()['query']
     return gc.query(db_name=gStore_config['database'], format='json', sparql=query, request_type='GET')
+
+
+@app.route('/img_base/<path:path>')
+def serve_img_base(path):
+    if path.startswith('car'):
+        return send_from_directory('/home/data/Downloads/car_base/images/', path)
+    else:
+        return send_from_directory('/home/data/Downloads/military_base/images/', path)
 
 
 if __name__ == '__main__':
